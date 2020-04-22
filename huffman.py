@@ -81,3 +81,42 @@ while i < len(arrChar) : #Membuat hasil Encoding untuk string input
 
 print()
 print("Seteleh Encoding : ", kodeHuffman)
+
+tupleChar = ()
+tupleFreq = ()
+tupleKode = ()
+tupleLength = ()
+
+i = 0
+while i < len(tabel) :
+    tupleChar = tupleChar + (tabel[i][0],)
+    tupleFreq = tupleFreq + (tabel[i][1],)
+    tupleKode = tupleKode + (tabel[i][2],)
+    tupleLength = tupleLength + (len(tabel[i][2]),)
+    i = i + 1
+
+minKode = min(tupleLength)
+selesai = False
+ListHuffman = list(kodeHuffman)
+encoded = ""
+pointer = 0
+i = 0
+while not selesai : #Proses decoding
+    panjangKode = 0
+    idx = 0
+    kode = ListHuffman[0] + ListHuffman[1]
+    if kode in tupleKode :
+        encoded = encoded + tupleChar[tupleKode.index(kode)]
+        ListHuffman.pop(0)
+        ListHuffman.pop(0)
+    else :
+        kode = kode + ListHuffman[2]
+        encoded = encoded + tupleChar[tupleKode.index(kode)]
+        ListHuffman.pop(0)
+        ListHuffman.pop(0)
+        ListHuffman.pop(0)
+    if len(ListHuffman) == 0 :
+        selesai = True
+    i = i + 1
+
+print("Setelah Decoding : ", encoded)
